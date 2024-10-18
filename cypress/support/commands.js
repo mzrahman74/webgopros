@@ -25,3 +25,16 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import "cypress-iframe";
+
+Cypress.Commands.add("mobileView", () => {
+  cy.window().then(win => {
+    const width = win.innerWidth;
+    const height = win.innerHeight;
+    if (width <= 991) {
+      cy.get(".navbar-toggler-icon").click();
+      cy.get('a[href="/about"]').click();
+    } else {
+      cy.get('a[href="/about"]').click();
+    }
+  });
+});

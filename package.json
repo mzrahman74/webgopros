@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cypress run",
+    "cy-parallelization": "npx cypress run --record 4378d871-0167-4f53-a2a4-3cd0829138e4 --parallel --group chrome --browser chrome --ci-build-id 1",
+    "cy_spec": "npx cypress run --spec cypress/e2e/webgopros-ui/ui.spec.js --record --key 1895a5b8-a7b9-4116-9db5-77de2b454b3d",
     "delete:reports": "rm -r cypress/results/* || true",
     "prereport": "npm run delete:reports",
     "mochawesome:merge": "npx mochawesome-merge \"cypress/results/mochawesome/*.json\" > mochawesome.json && npx marge mochawesome.json",
     "junit:merge": "npx junit-merge -d cypress/results/junit -o cypress/results/junit/result.xml",
-    "cypress_e2e": "npm run prereport && npx cypress run; npm run junit:merge; npm run mochawesome:merge",
-    "cy_run_browsers": "npm run cypress_e2e --browser firefox --group firefox & npm run  cypress_e2e --browser chrome --group chrome"
+    "cy_e2e": "npm run prereport && npx cypress run",
+    "e2e_report": "npm run cy_e2e; npm run junit:merge; npm run mochawesome:merge",
+    "cy_dashboard": "npm run cy_spec -- --browser webkit --group Webkit --ci-build-id 1 & npm run cy_spec -- --browser chrome --group Chrome --ci-build-id 1",
+    "cy_browsers": "npx cypress run --browser chrome & npx cypress run --browser webkit"
   },
   "author": "Mohammad",
   "license": "ISC",
