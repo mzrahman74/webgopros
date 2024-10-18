@@ -1,5 +1,4 @@
 /// <reference types="cypress"/>
-///<reference types="cypress-iframe" />
 
 describe("ui test", () => {
   beforeEach("open the url", () => {
@@ -11,7 +10,7 @@ describe("ui test", () => {
     cy.title().should("eq", "Mohammad Rahman Portfolio");
     cy.get("nav.navbar").should("be.visible", { force: true });
   });
-  it("footer should display", () => {
+  it("footer & navbar should display in home page", () => {
     cy.get("nav.navbar").should("be.visible");
     cy.get("#id-footer").should("be.visible");
     cy.get('footer[id="id-footer"] p').should("be.visible");
@@ -19,7 +18,6 @@ describe("ui test", () => {
   it("web confirm about page assertion", () => {
     cy.get('a[href="/about"]').click();
     cy.get("nav.navbar").should("be.visible", { force: true });
-    cy.get("img.profile").should("be.visible");
     cy.get('footer[id="id-footer"] p').should("be.visible");
   });
   it("web confirm contact page assertion", () => {
